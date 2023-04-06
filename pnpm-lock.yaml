@@ -7,6 +7,9 @@ devDependencies:
   webpack-cli:
     specifier: ^5.0.1
     version: 5.0.1(webpack@5.78.0)
+  webpack-merge:
+    specifier: ^5.8.0
+    version: 5.8.0
 
 packages:
 
