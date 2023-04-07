@@ -4,6 +4,9 @@ const { merge } = require('webpack-merge')
 
 module.exports = merge(common, {
   mode: 'development',
+  output: {
+    filename: 'main.js'
+  },
   devServer: {
     port: '3000',
     static: {
@@ -17,5 +20,16 @@ module.exports = merge(common, {
       overlay: true
     },
     liveReload: false
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
   }
 })
