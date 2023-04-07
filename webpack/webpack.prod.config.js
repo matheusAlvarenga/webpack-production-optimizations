@@ -11,10 +11,28 @@ module.exports = merge(common, {
     module: {
       rules: [
         {
+          //  THIS RULE IS FOR SIMPLE CSS WITHOUT CSS MODULES
           test: /\.css$/,
+          exclude: /\.module\.css$/,
           use: [
             MiniCssExtractPlugin.loader,
             'css-loader'
+          ]
+        },
+        {
+          // THIS RULE IS FOR CSS MODULES
+          test: /\.css$/,
+          include: /\.module\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[hash:base64]'
+                }
+              }
+            }
           ]
         }
       ]

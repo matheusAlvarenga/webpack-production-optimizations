@@ -24,10 +24,29 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
+        //  THIS RULE IS FOR SIMPLE CSS WITHOUT CSS MODULES
         test: /\.css$/,
+        exclude: /\.module\.css$/,
         use: [
           'style-loader',
           'css-loader'
+        ]
+      },
+      {
+        // THIS RULE IS FOR CSS MODULES
+        test: /\.css$/,
+        include: /\.module\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                // THIS MAKE THE CSS MODULES CLASSES READABLE IN DEV MODE
+                localIdentName: '[local]--[md4:hash:7]'
+              }
+            }
+          }
         ]
       }
     ]
