@@ -48,6 +48,15 @@ module.exports = merge(common, {
             }
           }
         ]
+      },
+      {
+        // THIS RULE IS FOR LESS FILES
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ]
       }
     ]
   }

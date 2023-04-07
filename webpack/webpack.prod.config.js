@@ -51,6 +51,15 @@ module.exports = merge(common, {
               }
             }
           ]
+        },
+        {
+          // THIS RULE IS FOR LESS FILES
+          test: /\.less$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'less-loader'
+          ]
         }
       ]
     },

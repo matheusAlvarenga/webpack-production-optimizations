@@ -1,5 +1,6 @@
 import '../styles/index.css'
 import { onLoadEventHandler, newTodoEventHandler, removeTodoEventHandler, toggleTodoEventListener } from './event-handlers';
+import { renderCssTests } from './css-tests';
 
 window.addEventListener('load', onLoadEventHandler)
 document.addEventListener('change', function (event) {
@@ -15,3 +16,5 @@ document.addEventListener('click', function (event) {
         toggleTodoEventListener(event)
     }
 })
+
+renderCssTests()

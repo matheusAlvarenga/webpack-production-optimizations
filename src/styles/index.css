@@ -110,3 +110,13 @@ h1 {
 .todolist-wrapper .todo-list li:hover .delete {
     visibility: visible;
 }
+
+.tests-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+
+    margin: 64px;
+}
