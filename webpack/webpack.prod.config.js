@@ -60,6 +60,15 @@ module.exports = merge(common, {
             'css-loader',
             'less-loader'
           ]
+        },
+        {
+          // THIS RULE IS FOR SASS FILES
+          test: /\.scss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader'
+          ]
         }
       ]
     },
