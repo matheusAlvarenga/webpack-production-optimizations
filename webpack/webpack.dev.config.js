@@ -66,6 +66,19 @@ module.exports = merge(common, {
           'css-loader',
           'sass-loader'
         ]
+      },
+      {
+        // THIS RULE IS FOR IMAGES
+        test: /\.(png|jpg|svg)$/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024,
+          }
+        },
+        generator: {
+          filename: './images/[name][ext]'
+        }
       }
     ]
   }

@@ -1,11 +1,13 @@
 const common = require('./webpack.common.config.js')
-const { merge } = require('webpack-merge') 
+const { merge } = require('webpack-merge')
+
+const path = require('path')
+const glob = require('glob')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
-const glob = require('glob')
-const path = require('path')
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 
 module.exports = merge(common, {
     mode: 'production',
@@ -25,7 +27,46 @@ module.exports = merge(common, {
               }
             ]
           }
-        })
+        }),
+        new ImageMinimizerPlugin({
+            minimizer: {
+                implementation: ImageMinimizerPlugin.imageminMinify,
+                options: {
+                    // Lossless optimization with custom option
+                    // Feel free to experiment with options for better result for you
+                    plugins: [
+                        ['imagemin-mozjpeg', { quality: 40 }],
+                        ['imagemin-pngquant', {
+                            quality: [0.65, 0.90],
+                            speed: 4
+                        }],
+                        ['imagemin-gifsicle', { interlaced: true }],
+                        [
+                            'imagemin-svgo',
+                            {
+                                plugins: [
+                                    {
+                                        name: 'preset-default',
+                                        params: {
+                                            overrides: {
+                                                removeViewBox: false,
+                                                addAttributesToSVGElement: {
+                                                    params: {
+                                                        attributes: [
+                                                            { xmlns: 'http://www.w3.org/2000/svg' },
+                                                        ],
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
+                                ],
+                            },
+                        ],
+                    ],
+                },
+            },
+        }),
       ]
     },
     module: {
@@ -73,6 +114,34 @@ module.exports = merge(common, {
             'postcss-loader',
             'sass-loader'
           ]
+        },
+        {
+          // THIS RULE IS FOR IMAGES
+          test: /\.(png|jpg|svg)$/,
+          type: 'asset',
+          parser: {
+            dataUrlCondition: {
+              maxSize: 10 * 1024,
+            }
+          },
+          generator: {
+            filename: './images/[name].[contenthash:6][ext]'
+          },
+          // HERE'S ANOTHER WAY TO MINIMIZE IMAGES
+          // use: [
+          //   {
+          //     loader: 'image-webpack-loader',
+          //     options: {
+          //       mozjpeg: {
+          //         quality: 40
+          //       },
+          //       pngquant: {
+          //         quality: [0.65, 0.9],
+          //         speed: 4
+          //       }
+          //     }
+          //   }
+          // ]
         }
       ]
     },
