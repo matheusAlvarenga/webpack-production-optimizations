@@ -66,6 +66,17 @@ module.exports = merge(common, {
                     ],
                 },
             },
+            // TRANSFORM PNG AND JPG TO WEBP
+            generator: [
+              {
+                type: 'asset',
+                preset: 'webp-custom-name',
+                implementation: ImageMinimizerPlugin.imageminGenerate,
+                options: {
+                  plugins: ['imagemin-webp']
+                }
+              }
+            ]
         }),
       ]
     },
