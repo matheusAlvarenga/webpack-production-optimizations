@@ -3,6 +3,9 @@ const { merge } = require('webpack-merge')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
+const glob = require('glob')
+const path = require('path')
 
 module.exports = merge(common, {
     mode: 'production',
@@ -76,6 +79,13 @@ module.exports = merge(common, {
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash:6].css'
+        }),
+        // Using purge css to remove unused css of bundle
+        new PurgeCSSPlugin({
+          paths: glob.sync(
+            `${path.join(__dirname, '../src')}/**/*`,
+            { nodir: true }
+          )
         })
     ]
 })
