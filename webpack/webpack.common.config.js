@@ -8,6 +8,9 @@ const config = {
   output: {
     path: path.resolve(__dirname, '../dist')
   },
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
   module: {
     rules: [
       {
@@ -19,7 +22,7 @@ const config = {
         ]
       },
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         exclude: '/node_modules/',
         use: [
           {

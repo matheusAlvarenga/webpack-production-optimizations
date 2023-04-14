@@ -1,5 +1,6 @@
 import { renderTodos, clearNewTodoInput, getTodoId } from './ui';
 import { getAllTodos, addTodo, removeTodo, updateTodo } from './data';
+import { trim } from './helpers'
 
 export function onLoadEventHandler() {
     renderTodos(getAllTodos())
@@ -7,6 +8,7 @@ export function onLoadEventHandler() {
 
 export function newTodoEventHandler(event) {
     let text = event.target.value
+    text = trim(text)
     addTodo({
         id: Date.now(),
         text: text,
