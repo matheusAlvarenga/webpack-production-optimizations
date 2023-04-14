@@ -7,15 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve --config webpack/webpack.dev.config.js --hot",
     "compile:dev": "webpack --config webpack/webpack.dev.config.js",
-    "compile:prod": "webpack --config webpack/webpack.prod.config.js"
+    "compile:prod": "NODE_ENV=production webpack --config webpack/webpack.prod.config.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
     "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
+    "core-js": "^3.30.1",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^5.0.0",
     "html-loader": "^4.2.0",
