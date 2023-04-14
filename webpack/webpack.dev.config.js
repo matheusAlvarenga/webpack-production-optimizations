@@ -7,6 +7,7 @@ module.exports = merge(common, {
   output: {
     filename: 'main.js'
   },
+  devtool: 'source-map',
   devServer: {
     port: '3000',
     static: {
